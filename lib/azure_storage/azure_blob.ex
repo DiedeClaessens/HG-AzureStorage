@@ -85,20 +85,14 @@ defmodule AzureStorage.Blob do
     {:ok, opts} = NimbleOptions.validate(options, Schema.list_blobs_options())
     max_results = opts[:maxresults]
 
-    prefix =
-      case String.length(opts[:prefix]) do
-        0 -> []
-        _ -> ["&prefix=", opts[:prefix]]
-      end
-
     query = "#{container}?restype=container&comp=list&maxresults=#{max_results}"
-      # ([
-      #    container,
-      #    "?restype=container",
-      #    "&comp=list",
+    # ([
+    #    container,
+    #    "?restype=container",
+    #    "&comp=list",
 
-      #  ])
-      # |> IO.iodata_to_binary()
+    #  ])
+    # |> IO.iodata_to_binary()
 
     context
     |> build(method: :get, path: query)
